@@ -1,3 +1,4 @@
+Code taken from https://github.com/natescherer/apn_on_rails and adopted for use with mongoid
 h1. APN on Rails (Apple Push Notifications on Rails)
 
 APN on Rails is a Ruby on Rails gem that allows you to easily add Apple Push Notification (iPhone)
