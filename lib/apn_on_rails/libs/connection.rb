@@ -49,6 +49,7 @@ module APN
                    :host => configatron.apn.host,
                    :port => configatron.apn.port}.merge(options)
         puts options.inspect
+        debugger
         cert = File.read(options[:cert])
         ctx = OpenSSL::SSL::SSLContext.new
         ctx.key = OpenSSL::PKey::RSA.new(cert, options[:passphrase])
