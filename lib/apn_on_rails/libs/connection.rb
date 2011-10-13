@@ -20,8 +20,7 @@ module APN
       #   configatron.apn.cert = File.join(rails_root, 'config', 'apple_push_notification_development.pem')) # Development
       #   configatron.apn.cert = File.join(rails_root, 'config', 'apple_push_notification_production.pem')) # Production
       def open_for_delivery(options = {}, &block)
-        open(options, &block)
-        puts "#{options.inspect}"
+        open(options, &block)        
       end
       
       # Yields up an SSL socket to receive feedback from.
@@ -47,9 +46,7 @@ module APN
         options = {:cert => configatron.apn.cert,
                    :passphrase => configatron.apn.passphrase,
                    :host => configatron.apn.host,
-                   :port => configatron.apn.port}.merge(options)
-        puts options.inspect
-        debugger
+                   :port => configatron.apn.port}.merge(options)        
         cert = File.read(options[:cert])
         ctx = OpenSSL::SSL::SSLContext.new
         ctx.key = OpenSSL::PKey::RSA.new(cert, options[:passphrase])
