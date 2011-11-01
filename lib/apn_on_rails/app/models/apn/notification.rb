@@ -109,10 +109,10 @@ class APN::Notification < APN::Base
     # 
     # This can be run from the following Rake task:
     #   $ rake apn:notifications:deliver
-    def send_notifications(cert, passphrase, notifications = APN::Notification.all(:conditions => {:sent_at => nil}))
+    def send_notifications(host, cert, passphrase, notifications = APN::Notification.all(:conditions => {:sent_at => nil}))
       unless notifications.nil? || notifications.empty?
 
-        APN::Connection.open_for_delivery({:cert=>cert, :passphrase=>passphrase}) do |conn, sock|
+        APN::Connection.open_for_delivery({:host=>host, :cert=>cert, :passphrase=>passphrase}) do |conn, sock|
           notifications.each do |noty|
             conn.write(noty.message_for_sending)
             noty.sent_at = Time.now
