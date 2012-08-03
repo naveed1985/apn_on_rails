@@ -90,7 +90,7 @@ class APN::Notification < APN::Base
   # Creates the binary message needed to send to Apple.
   def message_for_sending
     json = self.to_apple_json
-    message = "\0\0 #{self.device.to_hexa}\0#{json.length.chr}#{json}".force_encoding('UTF-8')
+    message = "\0\0 #{self.device.to_hexa}\0#{json.length.chr}#{json}".force_encoding("us-ascii")
     raise APN::Errors::ExceededMessageSizeError.new(message) if message.size.to_i > 256
     message
   end
@@ -116,7 +116,7 @@ class APN::Notification < APN::Base
         APN::Connection.open_for_delivery({:host=>host, :cert=>cert, :passphrase=>passphrase}) do |conn, sock|
           puts "3"
           notifications.each do |noty|
-            puts "4"
+            puts "4 "
             conn.write(noty.message_for_sending)
             puts "5"
             noty.sent_at = Time.now
