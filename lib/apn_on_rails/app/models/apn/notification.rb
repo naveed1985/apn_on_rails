@@ -92,8 +92,8 @@ class APN::Notification < APN::Base
     puts "1.1"
     json = self.to_apple_json
     puts "1.2 #{json.encoding}"
-    message = "\0\0 #{self.device.to_hexa.force_encoding("ASCII-8BIT")}\0#{json.length.chr.force_encoding("ASCII-8BIT")}#{json.force_encoding("ASCII-8BIT")}"
-    puts "1.3 #{message.encoding}"
+    message = "\0\0 #{self.device.to_hexa.force_encoding("US-ASCII")}\0#{json.length.chr.force_encoding("US-ASCII")}#{json.force_encoding("US-ASCII")}"
+    puts "1.3 #{message.encoding} Length #{message.length}"
     raise APN::Errors::ExceededMessageSizeError.new(message) if message.size.to_i > 256
     message
   end
